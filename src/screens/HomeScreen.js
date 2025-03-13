@@ -1,5 +1,5 @@
 
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, FlatList } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, FlatList, ImageBackground  } from "react-native";
 import React, { useState } from "react";
 
 const categories = [
@@ -17,6 +17,7 @@ const categories = [
 export default function HomeScreen() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   return (
+    
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
