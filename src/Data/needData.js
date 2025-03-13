@@ -1,0 +1,14 @@
+// needData.js
+export const needData = [
+    'FISIOTERAPIA',
+    'ACTIVIDADES CREATIVAS',
+    'ASEO DIARIO',
+    'CAMBIO DE PAÑAL',
+    'ACOMPAÑAMIENTO',
+    'TOMA SIGNOS VITALES',
+    'PREPARAR ALIMENTOS',
+    'CAMBIO DE SONDA',
+    'ADMINISTRACIÓN MEDICAMENTOS',
+    'ACTIVIDADES CREATIVAS',
+  ];
+  

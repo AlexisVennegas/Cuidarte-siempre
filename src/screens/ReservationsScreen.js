@@ -10,7 +10,7 @@ const reservations = [
     experience: "5 años",
     date: "12/05/2024",
     rating: 4.8,
-    // image: require("../../assets/nurse1.png"),
+    image: require("../../assets/enfermera_image.png"),
   },
   {
     id: "2",
@@ -19,7 +19,7 @@ const reservations = [
     experience: "5 años",
     date: "12/05/2024",
     rating: 4.8,
-    // image: require("../../assets/nurse2.png"),
+    image: require("../../assets/enfermera_image.png"),
   },
   {
     id: "3",
@@ -28,7 +28,7 @@ const reservations = [
     experience: "5 años",
     date: "12/05/2024",
     rating: 4.8,
-    // image: require("../../assets/nurse3.png"),
+    image: require("../../assets/enfermera_image.png"),
   },
 ];
 
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   profileImage: {
     width: 60,
     height: 60,
-    borderRadius: 30,
+    // borderRadius: 30,
   },
   cardContent: {
     flex: 1,
