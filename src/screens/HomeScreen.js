@@ -1,22 +1,42 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, FlatList, ScrollView, Platform} from 'react-native';
 import { categories } from '../Data/categoriesData';
 import { needData } from '../Data/needData';
 import { diseaseData } from '../Data/enfermedadesData';
 import { Picker } from '@react-native-picker/picker';
 import {styles} from '../Style/HomeScreenStyles';
 import {stylesSteps} from '../Style/HomeScreenStyles';
+import {reservations} from '../Data/reservationsData';
+import { Ionicons } from "@expo/vector-icons";
+import {reservationStyle} from '../Style/ReservationStyles';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
 // Categorías iniciales de la primera vista
+
+
 
 
 export default function HomeScreen() {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectcategories, setSelectCategories] = useState([]);
+  const [selectdiseases, setSelectDiseases] = useState([]);
   const [step, setStep] = useState(1);  // Controlar el paso actual
   const [selectedDays, setSelectedDays] = useState([]);
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
   const [startDate, setStartDate] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
 
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios' ? true : false);
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
   const toggleDay = (day) => {
     if (selectedDays.includes(day)) {
       setSelectedDays(selectedDays.filter((d) => d !== day));
@@ -25,6 +45,22 @@ export default function HomeScreen() {
     }
   };
 
+  // funcion para las categories
+  const toggleCategory = (category) => {
+    if (selectcategories.includes(category)) {
+      setSelectCategories(selectcategories.filter((c) => c !== category));
+    } else {
+      setSelectCategories([...selectcategories, category]);
+    }
+  };
+  // funcion para las enfermedades
+  const toggleDisease = (disease) => {
+    if (selectdiseases.includes(disease)) {
+      setSelectDiseases(selectdiseases.filter((d) => d !== disease));
+    } else {
+      setSelectDiseases([...selectdiseases, disease]);
+    }
+  };
 
   const nextStep = () => {
     if (step < 7) {
@@ -77,7 +113,13 @@ export default function HomeScreen() {
 
               <ScrollView contentContainerStyle={stylesSteps.needsGrid}>
                 {needData.map((item, index) => (
-                  <TouchableOpacity key={index} style={stylesSteps.needButton}>
+                  <TouchableOpacity key={index} /// metodo para que cambie de color al seleccionar
+                    style={[
+                      stylesSteps.needButton,
+                      selectcategories.includes(item) && stylesSteps.needButtonSelected,
+                    ]}
+                    onPress={() => toggleCategory(item)}
+                  >
                     <Text style={stylesSteps.needButtonText}>{item}</Text>
                   </TouchableOpacity>
                 ))}
@@ -93,7 +135,13 @@ export default function HomeScreen() {
             <ScrollView contentContainerStyle={stylesSteps.needsGrid}>
 
               {diseaseData.map((item, index) => (
-                <TouchableOpacity key={index} style={stylesSteps.needButton}>
+                <TouchableOpacity key={index} 
+                  style={[
+                    stylesSteps.needButton,
+                    selectdiseases.includes(item) && stylesSteps.needButtonSelected,
+                  ]}
+                  onPress={() => toggleDisease(item)}
+                >
                   <Text style={stylesSteps.needButtonText}>{item}</Text>
                 </TouchableOpacity>
 
@@ -170,7 +218,8 @@ export default function HomeScreen() {
                 value={startDate}
                 onChangeText={setStartDate}
                 keyboardType="numeric"
-              />
+              />  
+    
             </View>
 
             </ScrollView>
@@ -181,6 +230,27 @@ export default function HomeScreen() {
           <>
             {/* Paso 5: Selección de personal */}
             <Text>Estas son nuestras opciones de personal que más se adecuan a tus necesidades:</Text>
+                <FlatList
+                    data={reservations}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+            <View style={reservationStyle.card}>
+            <Image source={item.image} style={reservationStyle.profileImage} />
+            <View style={reservationStyle.cardContent}>
+              <Text style={reservationStyle.nameText}>{item.name}</Text>
+              <Text style={reservationStyle.roleText}>{item.role}</Text>
+              <Text style={reservationStyle.experienceText}>Experiencia: <Text style={reservationStyle.highlight}>{item.experience}</Text></Text>
+              <Text>Fecha de solicitud: <Text style={reservationStyle.bold}>{item.date}</Text></Text>
+            </View>
+            <View>
+              <Ionicons name="star" size={18} color="#FFD700" />
+              <Text style={reservationStyle.ratingText}>{item.rating}</Text>
+            </View>
+          </View>
+          )}
+        />
+    
+
             {/* Muestra una lista de opciones de enfermeras o personal */}
           </>
         );

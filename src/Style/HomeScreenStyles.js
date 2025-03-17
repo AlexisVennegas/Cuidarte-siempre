@@ -67,6 +67,9 @@ export const stylesSteps = StyleSheet.create({
     justifyContent: 'center',
     // margin: 5,
   },
+  needButtonSelected: {
+    backgroundColor: '#008CFF',
+  },
   needButtonText: {
     fontSize: 12,
     // bold 
@@ -176,7 +179,7 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
   categoryText: {
-    fontSize: 12,
+    fontSize: 11,
     fontWeight: 'bold',
     textAlign: 'center',
   },
