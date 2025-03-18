@@ -190,6 +190,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 20,
   },
+  nextButtonHidde: {
+    display: 'none',
+  },
   nextButtonText: {
     color: '#FFF',
     fontWeight: 'bold',
