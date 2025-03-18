@@ -68,7 +68,7 @@ export const stylesSteps = StyleSheet.create({
     // margin: 5,
   },
   needButtonSelected: {
-    backgroundColor: '#008CFF',
+    backgroundColor: '#BAE5FF',
   },
   needButtonText: {
     fontSize: 12,
@@ -171,7 +171,7 @@ export const styles = StyleSheet.create({
   },
 
   categoryButtonSelected: {
-    backgroundColor: '#0096FF',
+    backgroundColor: '#BAE5FF',
   },
   categoryIcon: {
     width: 40,
