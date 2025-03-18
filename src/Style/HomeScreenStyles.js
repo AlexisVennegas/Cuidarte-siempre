@@ -248,7 +248,7 @@ export const styles = StyleSheet.create({
     borderColor: '#ccc',
   },
   dayButtonSelected: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#BAE5FF',
   },
   dayText: {
     fontSize: 16,

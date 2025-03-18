@@ -17,26 +17,30 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 
 export default function HomeScreen() {
+    // marca las categorias seleccionadas
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectcategories, setSelectCategories] = useState([]);
   const [selectdiseases, setSelectDiseases] = useState([]);
   const [step, setStep] = useState(1);  // Controlar el paso actual
+
   const [selectedDays, setSelectedDays] = useState([]);
-  const [startTime, setStartTime] = useState('');
-  const [endTime, setEndTime] = useState('');
+  // marca la hora de inicio y fin
+  const [startTime, setStartTime] = useState('0:00');
+  const [endTime, setEndTime] = useState('0:00');
+  // marca la fecha de inicio
   const [startDate, setStartDate] = useState('');
+  // marca la fecha de fin
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+  const [selectedMethod, setSelectedMethod] = useState("card");
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios' ? true : false);
-    setDate(currentDate);
-  };
+  const [phone, setPhone] = useState("");
+// marca la fecha de inicio
+  const days = ["L", "M", "X", "J", "V", "S", "D"];
 
-  const showDatepicker = () => {
-    setShow(true);
-  };
+
+
+
   const toggleDay = (day) => {
     if (selectedDays.includes(day)) {
       setSelectedDays(selectedDays.filter((d) => d !== day));
@@ -63,14 +67,18 @@ export default function HomeScreen() {
   };
 
   const nextStep = () => {
-    if (step < 7) {
+    if (step < 10) {
       setStep(step + 1);
     }
-    if (step === 7) {
+    if (step === 10 ) {
       setStep(1);
     }
   };
-
+  const previousStep = () => {
+    if (step > 1) {
+      setStep(step - 1);
+    }
+  };
   const renderStepContent = () => {
     switch (step) {
       case 1:
@@ -258,7 +266,65 @@ export default function HomeScreen() {
         return (
           <>
             {/* Paso 6: Detalles del personal */}
-            <Text>Perfil del personal seleccionado:</Text>
+            <ScrollView style={{ flex: 1, backgroundColor: "#fff", padding: 20 }}>
+      {/* Header */}
+      {/* <Text style={{ fontSize: 12, color: "#666", marginBottom: 5 }}>CANDIDATE DETAIL</Text> */}
+     
+
+      {/* Saludo */}
+      {/* <Text style={{ fontSize: 16, color: "#333" }}>
+        Hola, <Text style={{ color: "#007BFF" }}>María Fernanda</Text>
+      </Text>
+      <Text style={{ fontSize: 14, color: "#666", marginBottom: 10 }}>
+        Estás viendo el CV de:
+      </Text> */}
+
+      {/* Perfil */}
+      <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 15 }}>
+        <Image source={require('../../assets/enfermera_image.png')} // Cambia la ruta de la imagen según tu estructura de carpetas 
+          style={{ width: 60, height: 60, marginRight: 10 }}
+        />
+        <View>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>María López Ramírez</Text>
+          <Text style={{ fontSize: 14, color: "#666" }}>Auxiliar de enfermería</Text>
+          <Text style={{ fontSize: 14, color: "#666" }}>
+            Experiencia: <Text style={{ color: "#007BFF" }}>5 años</Text>
+          </Text>
+        </View>
+      </View>
+
+      {/* Descripción */}
+      <Text style={{ fontSize: 14, color: "#333", marginBottom: 10 }}>
+        Experiencia en el cuidado de pacientes a domicilio. Especialista en asistencia a personas mayores, manejo de medicación, curaciones y control de signos vitales. Empática, responsable y con vocación de servicio.
+      </Text>
+
+      {/* Experiencia Laboral */}
+      <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>Experiencia Laboral</Text>
+      <Text style={{ fontSize: 14, fontWeight: "bold" }}>Enfermera a Domicilio | [Nombre de Empresa]</Text>
+      <Text style={{ fontSize: 14, color: "#666", marginBottom: 5 }}>2020 - Presente</Text>
+      <Text style={{ fontSize: 14, color: "#333" }}>• Atención integral a pacientes con movilidad reducida.</Text>
+      <Text style={{ fontSize: 14, color: "#333" }}>• Administración de medicamentos y terapias.</Text>
+      <Text style={{ fontSize: 14, color: "#333", marginBottom: 10 }}>• Monitoreo de signos vitales y seguimiento médico.</Text>
+
+      {/* Formación */}
+      <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>Formación</Text>
+      <Text style={{ fontSize: 14, fontWeight: "bold" }}>Licenciatura en Enfermería | [Universidad]</Text>
+      <Text style={{ fontSize: 14, color: "#666", marginBottom: 10 }}>[Año]</Text>
+
+      {/* Botón de acción */}
+      {/* <TouchableOpacity 
+        style={{
+          backgroundColor: "#007BFF",
+          paddingVertical: 12,
+          borderRadius: 8,
+          alignItems: "center"
+        }}
+      >
+        <Text style={{ color: "#fff", fontSize: 16, fontWeight: "bold" }}>
+          SOLICITAR SERVICIO
+        </Text>
+      </TouchableOpacity> */}
+    </ScrollView>
             {/* Muestra detalles del personal seleccionado */}
           </>
         );
@@ -266,8 +332,213 @@ export default function HomeScreen() {
         return (
           <>
             {/* Paso 7: Pasarela de pago */}
-            <Text>Selecciona tu forma de pago:</Text>
+            <ScrollView style={{ flex: 1, backgroundColor: "#fff", padding: 20 }}>
+      {/* Header */}
+      
+
+      
+
+      {/* Perfil */}
+      <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 15 }}>
+        <Image 
+          source={require('../../assets/enfermera_image.png')} // Cambia la ruta de la imagen según tu estructura de carpetas
+          style={{ width: 60, height: 60,  marginRight: 10 }}
+        />
+        <View>
+          <Text style={{ fontSize: 18, fontWeight: "bold" }}>María López Ramírez</Text>
+          <Text style={{ fontSize: 14, color: "#666" }}>Auxiliar de enfermería</Text>
+          <Text style={{ fontSize: 14, color: "#666" }}>
+            Experiencia: <Text style={{ color: "#007BFF" }}>5 años</Text>
+          </Text>
+        </View>
+      </View>
+
+      {/* Días seleccionados */}
+      <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>Los días seleccionados son:</Text>
+      <View style={{ flexDirection: "row", justifyContent: "center", marginBottom: 10 }}>
+        {days.map((day) => (
+          <TouchableOpacity
+            key={day}
+            style={{
+              backgroundColor: selectedDays.includes(day) ? "#BFE3FF" : "#F0F0F0",
+              padding: 10,
+              margin: 5,
+              borderRadius: 10,
+              width: 40,
+              alignItems: "center",
+            }}
+            onPress={() => {
+              setSelectedDays((prev) =>
+                prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+              );
+            }}
+          >
+            <Text style={{ fontSize: 16, fontWeight: "bold", color: "#333" }}>{day}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* Horario */}
+      <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>Horario seleccionado</Text>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10 }}>
+        <TextInput
+          style={{
+            backgroundColor: "#F0F0F0",
+            padding: 10,
+            borderRadius: 10,
+            width: "45%",
+            textAlign: "center",
+            fontSize: 16,
+          }}
+          value={startTime}
+          editable={false}
+        />
+        <TextInput
+          style={{
+            backgroundColor: "#F0F0F0",
+            padding: 10,
+            borderRadius: 10,
+            width: "45%",
+            textAlign: "center",
+            fontSize: 16,
+          }}
+          // uamos starttime para el value
+          value={endTime}
+          editable={false}
+        />
+      </View>
+
+      {/* Fecha */}
+      <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>A partir de:</Text>
+      <TextInput
+        style={{
+          backgroundColor: "#F0F0F0",
+          padding: 10,
+          borderRadius: 10,
+          marginBottom: 10,
+          fontSize: 16,
+          textAlign: "center",
+        }}
+        value={startDate}
+        onChangeText={setStartDate}
+        placeholder={`${new Date().toLocaleDateString()}`}
+        editable={false}
+      />
+
+      {/* Teléfono */}
+      <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>Ingresa tu teléfono</Text>
+      <TextInput
+        style={{
+          backgroundColor: "#F0F0F0",
+          padding: 10,
+          borderRadius: 10,
+          fontSize: 16,
+          marginBottom: 20,
+        }}
+        placeholder="+52 0000000000"
+        keyboardType="phone-pad"
+        value={phone}
+        onChangeText={setPhone}
+      />
+
+      {/* Botón de confirmar */}
+  
+
+    
+    </ScrollView>
             {/* Muestra las opciones de pago */}
+          </>
+        );
+        case 8: 
+        return (
+          <>
+         <ScrollView style={{ flex: 1, backgroundColor: "#fff", padding: 20 }}>
+ 
+      
+     {/* Tarjeta de crédito/débito */}
+      <TouchableOpacity 
+        style={{
+          backgroundColor: "#F8F9FA",
+          borderRadius: 15,
+          padding: 15,
+          marginTop: 10,
+          borderWidth: selectedMethod === "card" ? 2 : 0,
+          borderColor: "#007BFF"
+        }}
+        onPress={() => setSelectedMethod("card")}
+      >
+        <Text style={{ fontSize: 14, fontWeight: "bold", marginBottom: 5 }}>
+          Tarjeta de crédito/débito
+        </Text>
+        <View style={{
+          backgroundColor: "#007BFF",
+          borderRadius: 15,
+          padding: 15,
+          alignItems: "center"
+          
+        }}>
+          
+          <Text style={{ color: "#fff", fontSize: 16 }}>Fancy VISA</Text>
+          <Text style={{ color: "#fff", fontSize: 20, fontWeight: "bold", marginVertical: 5 }}>
+            1237 6890 7654 5678
+          </Text>
+          <Text style={{ color: "#fff", fontSize: 12 }}>
+            Name: Arina Hawadah | Exp: 10/24
+          </Text>
+        </View>
+      </TouchableOpacity>
+
+      {/* Añadir tarjeta */}
+      <TouchableOpacity 
+        style={{
+          backgroundColor: "#fff",
+          borderWidth: 1,
+          borderColor: "#ddd",
+          borderRadius: 10,
+          padding: 15,
+          marginVertical: 10,
+          alignItems: "center"
+        }}
+      >
+        <Text style={{ fontSize: 14, fontWeight: "bold" }}>AÑADIR TARJETA</Text>
+      </TouchableOpacity>
+
+      {/* PayPal */}
+      <TouchableOpacity 
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#F8F9FA",
+          borderRadius: 15,
+          padding: 15,
+          borderWidth: selectedMethod === "paypal" ? 2 : 0,
+          borderColor: "#007BFF"
+        }}
+        onPress={() => setSelectedMethod("paypal")}
+      >
+        <Image 
+          source={require('../../assets/paypal.png')} // Cambia la ruta de la imagen según tu estructura de carpetas
+          style={{ width: 30, height: 30, marginRight: 10 }}
+        />
+        <Text style={{ fontSize: 16 }}>Paypal</Text>
+        <View style={{ flex: 1, alignItems: "flex-end" }}>
+          <View 
+            style={{
+              width: 20, height: 20,
+              borderRadius: 10,
+              borderWidth: 2,
+              borderColor: "#007BFF",
+              backgroundColor: selectedMethod === "paypal" ? "#007BFF" : "#fff"
+            }} 
+          />
+        </View>
+      </TouchableOpacity>
+
+
+   
+
+    
+    </ScrollView>
           </>
         );
       default:
@@ -276,14 +547,19 @@ export default function HomeScreen() {
   };
 
   return (
+    // header
     <View style={styles.container}>
       <View style={styles.header}>
         <Image source={require('../../assets/logo.png')} style={styles.logo} />
         <Text style={styles.welcomeText}>
           <Text style={styles.userName}>Hola, María Fernanda</Text>
 
-          <TouchableOpacity style={styles.backButton}>
-            <Image source={require('../../assets/arrow.png')} style={styles.backIcon} />
+          <TouchableOpacity style={styles.backButton}  onPress={previousStep}>
+            <Image source={require('../../assets/arrow.png')} style={styles.backIcon}
+            // funcion press que regresa al paso anterior
+           
+         
+            />
           </TouchableOpacity>
 
         </Text>
@@ -301,6 +577,12 @@ export default function HomeScreen() {
           {step === 3 && '¿Qué padecimientos tiene tu paciente?'}
           {step === 4 && 'Indica el horario y los días que necesitas el servicio'}
           {step === 5 && 'Estas son nuestras opciones de personal que más se adecuan a tus necesidades'}
+          {step === 6 && 'Detalles del personal'}
+          {step === 7 && 'Detalles de la solicitud'}
+          {step === 8 && 'Selecciona el método de pago'}
+          {step === 9 && 'Selecciona el método de pago'}
+          
+
         </Text>
       </View>
       {/* Contenido dinámico según el paso */}
@@ -308,7 +590,21 @@ export default function HomeScreen() {
 
       {/* Botón siguiente */}
       <TouchableOpacity style={styles.nextButton} onPress={nextStep}>
-        <Text style={styles.nextButtonText}>SIGUIENTE</Text>
+        <Text style={styles.nextButtonText}>
+        {step === 1 && 'Siguiente' }
+        {step === 2 && 'Siguiente' }
+        {step === 3 && 'Siguiente' }
+        {step === 4 && 'Buscar Personal' }
+        {step === 5 &&  '' }
+        {step === 6 &&  'Solicitar Servicio' }
+        {step === 7 &&  'Confirmar Solicitud' }
+        {step === 8 &&  'Ver Historial De Servicios' }
+        {step === 9 &&  'Confirmar y Pagar' }
+
+
+
+
+        </Text>
       </TouchableOpacity>
     </View>
   );
