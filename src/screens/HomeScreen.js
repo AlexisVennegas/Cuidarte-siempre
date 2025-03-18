@@ -458,6 +458,7 @@ export default function HomeScreen() {
      {/* Tarjeta de crédito/débito */}
       <TouchableOpacity 
         style={{
+          flexDirection: "row",
           backgroundColor: "#F8F9FA",
           borderRadius: 15,
           padding: 15,
@@ -467,10 +468,15 @@ export default function HomeScreen() {
         }}
         onPress={() => setSelectedMethod("card")}
       >
-        <Text style={{ fontSize: 14, fontWeight: "bold", marginBottom: 5 }}>
+         <Image 
+          source={require('../../assets/target.png')} // Cambia la ruta de la imagen según tu estructura de carpetas
+          style={{ width: 30, height: 30, marginRight: 10 }}
+        />
+        <Text style={{ fontSize: 16, }}>
           Tarjeta de crédito/débito
         </Text>
-        <View style={{
+        
+        {/* <View style={{
           backgroundColor: "#007BFF",
           borderRadius: 15,
           padding: 15,
@@ -485,7 +491,7 @@ export default function HomeScreen() {
           <Text style={{ color: "#fff", fontSize: 12 }}>
             Name: Arina Hawadah | Exp: 10/24
           </Text>
-        </View>
+        </View> */}
       </TouchableOpacity>
 
       {/* Añadir tarjeta */}
