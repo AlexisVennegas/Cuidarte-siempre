@@ -38,6 +38,8 @@ export default function HomeScreen() {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [birthDate, setBirthDate] = useState('');
   const hideDatePicker = () => setDatePickerVisibility(false);
+  const [selectcategories, setSelectCategories] = useState([]);
+  
   // un json para ir guardando la informacion del formulario
   const [formData, setFormData] = useState({
     selectedCategory: null,
@@ -70,7 +72,7 @@ export default function HomeScreen() {
     switch (step) {
       case 1:
         return (
-       <Step1 />
+       <Step1 selectcategories={selectcategories} setSelectCategories={setSelectCategories} />
         );
       case 2:
         return (
@@ -86,8 +88,8 @@ export default function HomeScreen() {
         return (
           <Step4 // Pasamos las props necesarias
             startTime={startTime}
-            setStartTime={setStartTime}
             endTime={endTime}
+            setStartTime={setStartTime}
             setEndTime={setEndTime}
             selectedDays={selectedDays}
             setSelectedDays={setSelectedDays}

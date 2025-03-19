@@ -4,33 +4,36 @@ import { styles } from "../../Style/HomeScreenStyles";
 import { stylesSteps } from "../../Style/HomeScreenStyles";
 import { Picker } from "@react-native-picker/picker";
 
-const Step4 = ({ startTime, setStartTime, endTime, setEndTime, selectedDays, setSelectedDays    , date, setStartDate }) => {
+const Step4 = ({ startTime, endTime, setStartTime, setEndTime, selectedDays, setSelectedDays, date, setStartDate }) => {
   const [isValid, setIsValid] = useState(true); // Para manejar la validez de la fecha
 
   // Validar el formato DD/MM/AAAA
   // Validar el formato DD/MM/AAAA
   const handleDateChange = (text) => {
-    // Solo permitir números y '/'
-    let formattedText = text.replace(/[^0-9/]/g, '');
+    let cleaned = text.replace(/\D/g, ""); // Eliminar caracteres no numéricos
+    let formattedText = "";
 
-    // Insertar '/' automáticamente cuando sea necesario
-    if (formattedText.length > 2 && formattedText[2] !== '/') {
-      formattedText = `${formattedText.slice(0, 2)}/${formattedText.slice(2)}`;
+    if (cleaned.length > 0) formattedText += cleaned.substring(0, 2);
+    if (cleaned.length > 2) formattedText += "/" + cleaned.substring(2, 4);
+    if (cleaned.length > 4) formattedText += "/" + cleaned.substring(4, 8);
+
+    setStartDate(formattedText);
+
+    // Validar si la fecha tiene el formato correcto y es válida
+    if (cleaned.length === 8) {
+      const day = parseInt(cleaned.substring(0, 2), 10);
+      const month = parseInt(cleaned.substring(2, 4), 10);
+      const year = parseInt(cleaned.substring(4, 8), 10);
+
+      // Verificar si es una fecha válida
+      const dateObject = new Date(year, month - 1, day);
+      const isValidDate = dateObject.getDate() === day && 
+                          dateObject.getMonth() === month - 1 && 
+                          dateObject.getFullYear() === year;
+      setIsValid(isValidDate);
+    } else {
+      setIsValid(false);
     }
-    if (formattedText.length > 5 && formattedText[5] !== '/') {
-      formattedText = `${formattedText.slice(0, 5)}/${formattedText.slice(5)}`;
-    }
-
-    // Validar el formato DD/MM/YYYY
-    const dateParts = formattedText.split('/');
-    const isDateValid =
-      dateParts.length === 3 &&
-      dateParts[0].length === 2 &&
-      dateParts[1].length === 2 &&
-      dateParts[2].length === 4;
-
-    setStartDate(formattedText); // Establecer la fecha con formato
-    setIsValid(isDateValid); // Establecer si la fecha es válida
   };
 
   const toggleDay = (day) => {
@@ -48,43 +51,50 @@ const Step4 = ({ startTime, setStartTime, endTime, setEndTime, selectedDays, set
   return (
     <>
       {/* Paso 4: Horario y días */}
+
+      {/* <ScrollView style={styles.containerTimer}> */}
+        <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
       <Text style={stylesSteps.title}>
         ¿Franja horaria en la que necesitas nuestros servicios?
       </Text>
-
-      <ScrollView contentContainerStyle={styles.containerTimer}>
         <View style={styles.containerInfo}>
           <View style={styles.timeContainer}>
             <Text style={styles.titletimerDE}>De</Text>
             <View style={styles.timeInput}>
               <Picker
+                style={styles.timeInput}
                 selectedValue={startTime}
                 onValueChange={(itemValue) => setStartTime(itemValue)}
                 mode="dropdown"
               >
-                {[...Array(24).keys()].map((i) => (
-                  <React.Fragment key={i}>
-                    <Picker.Item label={`${i}:00`} value={`${i}:00`} />
-                    <Picker.Item label={`${i}:30`} value={`${i}:30`} />
-                  </React.Fragment>
-                ))}
+                {[...Array(24).keys()].map((i) => {
+                  const hourString = i.toString().padStart(2, "0"); // Asegurar formato "00", "01", ..., "23"
+                  return [
+                    <Picker.Item key={`${hourString}:00`} label={`${hourString}:00`} value={`${hourString}:00`} />,
+                    <Picker.Item key={`${hourString}:30`} label={`${hourString}:30`} value={`${hourString}:30`} />
+                  ];
+                })}
               </Picker>
+
             </View>
 
             <Text style={styles.titletimerDE}>Hasta</Text>
             <View style={styles.timeInput}>
               <Picker
+              style={styles.timeInput}
                 selectedValue={endTime}
                 onValueChange={(itemValue) => setEndTime(itemValue)}
                 mode="dropdown"
               >
-                {[...Array(24).keys()].map((i) => (
-                  <React.Fragment key={i}>
-                    <Picker.Item label={`${i}:00`} value={`${i}:00`} />
-                    <Picker.Item label={`${i}:30`} value={`${i}:30`} />
-                  </React.Fragment>
-                ))}
+                {[...Array(24).keys()].map((i) => {
+                  const hourString = i.toString().padStart(2, "0"); // Asegurar formato "00", "01", ..., "23"
+                  return [
+                    <Picker.Item key={`${hourString}:00`} label={`${hourString}:00`} value={`${hourString}:00`} />,
+                    <Picker.Item key={`${hourString}:30`} label={`${hourString}:30`} value={`${hourString}:30`} />
+                  ];
+                })}
               </Picker>
+
             </View>
           </View>
         </View>

@@ -100,7 +100,6 @@ export const styles = StyleSheet.create({
     marginTop: 5,
   },
   containerInfo: {
-  
     width: '100%',
     height: '25%',
     padding: 20,
@@ -139,7 +138,6 @@ export const styles = StyleSheet.create({
   },
   containerTimer: {
     flex: 1,
-  
   },
   header: {
     alignItems: 'center',
@@ -218,7 +216,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   timeInput: {
-  
     width: 95,
     height: 56,
     padding: 8,

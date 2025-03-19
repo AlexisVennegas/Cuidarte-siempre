@@ -36,11 +36,8 @@ const Step7 = ({ selectedDays, setSelectedDays, startDate, setStartDate, startTi
     return (
         <>
             {/* Paso 7: Pasarela de pago */}
-            <ScrollView style={{ flex: 1, backgroundColor: "#fff", padding: 20 }}>
+            <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
                 {/* Header */}
-
-
-
 
                 {/* Perfil */}
                 <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 15 }}>
