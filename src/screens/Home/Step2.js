@@ -6,7 +6,7 @@ import { Picker } from "@react-native-picker/picker";
 import { needData } from "../../Data/needData";
 
 
-const Step2 = ({selectcategories, setSelectCategories}) => {
+const Step2 = ({selectcategories, setSelectCategories, formData, setFormData}) => {
 
 
      // funcion para las categories
@@ -19,10 +19,11 @@ const Step2 = ({selectcategories, setSelectCategories}) => {
       setSelectCategories([...selectcategories, category]);
 
     }
-    // setFormData({
-    //   ...formData,
-    //   selectcategories: selectcategories,
-    // });
+    setFormData({
+      ...formData,
+      selectcategories: selectcategories,
+    });
+    
   };
  
 return (

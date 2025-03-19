@@ -50,8 +50,8 @@ export default function HomeScreen() {
     selectedDays: [],
     startDate: "",
   });
-  const [date, setDate] = useState('');
 
+  const [date, setDate] = useState('');
   const [startDate, setStartDate] = useState("");
 
 
@@ -72,16 +72,16 @@ export default function HomeScreen() {
     switch (step) {
       case 1:
         return (
-       <Step1 selectcategories={selectcategories} setSelectCategories={setSelectCategories} />
+       <Step1 selectcategories={selectcategories} setSelectCategories={setSelectCategories} formData={formData} setFormData={setFormData} />
         );
       case 2:
         return (
-          <Step2 selectcategories={selectcategories} setSelectCategories={setSelectCategories}
+          <Step2 selectcategories={selectcategories} setSelectCategories={setSelectCategories} formData={formData} setFormData={setFormData}
             />
         );
       case 3:
         return (
-          <Step3 selectdiseases={selectdiseases} setSelectDiseases={setSelectDiseases}
+          <Step3 selectdiseases={selectdiseases} setSelectDiseases={setSelectDiseases} formData={formData} setFormData={setFormData}
           />
         );
       case 4:
@@ -95,6 +95,9 @@ export default function HomeScreen() {
             setSelectedDays={setSelectedDays}
             startDate={date}
             setStartDate={setStartDate}
+            setDate={setDate}
+            formData={formData}
+            setFormData={setFormData}
           />);
       case 5:
         return <Step5 step={step} setStep={setStep} />; // Pasamos setStep como prop
@@ -161,9 +164,14 @@ export default function HomeScreen() {
       {/* Botón siguiente */}
       <TouchableOpacity
         // el step 5 desaparece el boton siguiente
-
+            
         style={step === 5 ? styles.nextButtonHidde : styles.nextButton}
-        onPress={nextStep}
+        //onPress={nextStep +() => console.log(formData)}
+        // onpress con el nextstep y console.log para ver el json
+        onPress={() => {
+          nextStep();
+          console.log(formData);
+        }}
       >
         <Text style={styles.nextButtonText}>
           {step === 1 && "Siguiente"}

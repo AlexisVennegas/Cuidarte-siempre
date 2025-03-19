@@ -4,36 +4,30 @@ import { styles } from "../../Style/HomeScreenStyles";
 import { stylesSteps } from "../../Style/HomeScreenStyles";
 import { Picker } from "@react-native-picker/picker";
 
-const Step4 = ({ startTime, endTime, setStartTime, setEndTime, selectedDays, setSelectedDays, date, setStartDate }) => {
+const Step4 = ({ startTime, endTime, setStartTime, setEndTime, selectedDays, setSelectedDays, date, setStartDate, setDate, formData, setFormData}) => {
   const [isValid, setIsValid] = useState(true); // Para manejar la validez de la fecha
 
-  // Validar el formato DD/MM/AAAA
-  // Validar el formato DD/MM/AAAA
-  const handleDateChange = (text) => {
-    let cleaned = text.replace(/\D/g, ""); // Eliminar caracteres no numéricos
-    let formattedText = "";
 
+  const handleDateChange = (text) => {
+    console.log("Texto ingresado:", text); // Para depurar
+  
+    let cleaned = text.replace(/\D/g, ""); // Eliminar caracteres no numéricos
+    console.log("Solo números:", cleaned);
+  
+    let formattedText = ""; // Mover la variable dentro de la función para evitar acumulación incorrecta
+  
     if (cleaned.length > 0) formattedText += cleaned.substring(0, 2);
     if (cleaned.length > 2) formattedText += "/" + cleaned.substring(2, 4);
     if (cleaned.length > 4) formattedText += "/" + cleaned.substring(4, 8);
-
+  
+    console.log("Texto formateado:", formattedText);
+  
     setStartDate(formattedText);
+    // actualizar el estado de la fecha
+    setDate(formattedText);
 
-    // Validar si la fecha tiene el formato correcto y es válida
-    if (cleaned.length === 8) {
-      const day = parseInt(cleaned.substring(0, 2), 10);
-      const month = parseInt(cleaned.substring(2, 4), 10);
-      const year = parseInt(cleaned.substring(4, 8), 10);
-
-      // Verificar si es una fecha válida
-      const dateObject = new Date(year, month - 1, day);
-      const isValidDate = dateObject.getDate() === day && 
-                          dateObject.getMonth() === month - 1 && 
-                          dateObject.getFullYear() === year;
-      setIsValid(isValidDate);
-    } else {
-      setIsValid(false);
-    }
+    // formattedtext es la fecha que se va a guardar
+    
   };
 
   const toggleDay = (day) => {
@@ -42,21 +36,18 @@ const Step4 = ({ startTime, endTime, setStartTime, setEndTime, selectedDays, set
     } else {
       setSelectedDays([...selectedDays, day]);
     }
-    // setFormData({
-    //   ...formData,
-    //   selectedDays: selectedDays,
-    // });
+    setFormData({
+      ...formData,
+      selectedDays: selectedDays,
+    });
   };
 
   return (
     <>
-      {/* Paso 4: Horario y días */}
-
-      {/* <ScrollView style={styles.containerTimer}> */}
-        <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <Text style={stylesSteps.title}>
-        ¿Franja horaria en la que necesitas nuestros servicios?
-      </Text>
+      <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
+        <Text style={stylesSteps.title}>
+          ¿Franja horaria en la que necesitas nuestros servicios?
+        </Text>
         <View style={styles.containerInfo}>
           <View style={styles.timeContainer}>
             <Text style={styles.titletimerDE}>De</Text>
@@ -75,13 +66,12 @@ const Step4 = ({ startTime, endTime, setStartTime, setEndTime, selectedDays, set
                   ];
                 })}
               </Picker>
-
             </View>
 
             <Text style={styles.titletimerDE}>Hasta</Text>
             <View style={styles.timeInput}>
               <Picker
-              style={styles.timeInput}
+                style={styles.timeInput}
                 selectedValue={endTime}
                 onValueChange={(itemValue) => setEndTime(itemValue)}
                 mode="dropdown"
@@ -94,7 +84,6 @@ const Step4 = ({ startTime, endTime, setStartTime, setEndTime, selectedDays, set
                   ];
                 })}
               </Picker>
-
             </View>
           </View>
         </View>
@@ -126,8 +115,6 @@ const Step4 = ({ startTime, endTime, setStartTime, setEndTime, selectedDays, set
             placeholder="DD/MM/AAAA"
             value={date}
             onChangeText={handleDateChange}
-            keyboardType="numeric"
-            maxLength={10} // Limitar a 10 caracteres (DD/MM/AAAA)
           />
           {!isValid && <Text style={styles.errorText}>Formato de fecha inválido</Text>}
         </View>

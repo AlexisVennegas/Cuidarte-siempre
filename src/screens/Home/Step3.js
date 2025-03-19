@@ -6,7 +6,7 @@ import { Picker } from "@react-native-picker/picker";
 import { diseaseData } from "../../Data/enfermedadesData";
 
 
-const Step4 = ({selectdiseases, setSelectDiseases}) => {
+const Step4 = ({selectdiseases, setSelectDiseases, formData, setFormData}) => {
 
     const toggleDisease = (disease) => {
         if (selectdiseases.includes(disease)) {
@@ -14,10 +14,11 @@ const Step4 = ({selectdiseases, setSelectDiseases}) => {
         } else {
           setSelectDiseases([...selectdiseases, disease]);
         }
-        // setFormData({
-        //   ...formData,
-        //   selectdiseases: selectdiseases,
-        // });
+        setFormData({
+          ...formData,
+          selectdiseases: selectdiseases,
+        });
+        
       };
     return (
 

@@ -5,11 +5,23 @@ import { stylesSteps } from "../../Style/HomeScreenStyles";
 import { Picker } from "@react-native-picker/picker";
 import { categories } from "../../Data/categoriesData";
 
-const Step1 = () => {
+const Step1 = ({formData, setFormData}) => {
 
     const [selectcategories, setSelectCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(null);
   
+    const toggleCategory = (category) => {
+      if (selectcategories.includes(category)) {
+        setSelectCategories(selectcategories.filter((c) => c !== category));
+      } else {
+        setSelectCategories([...selectcategories, category]);
+      }
+      setFormData({
+        ...formData,
+        selectcategories: selectcategories,
+      });
+    }
+
   return (
     <>
     {/* Paso 1: Selección de servicio */}
@@ -33,7 +45,12 @@ const Step1 = () => {
               styles.categoryButton,
               isSelected && styles.categoryButtonSelected,
             ]}
-            onPress={() => setSelectedCategory(item.id)}
+            //onPress={() => setSelectedCategory(item.id)}
+            // hacer ambas cosas con el onpress
+            onPress={() => {
+              setSelectedCategory(item.id);
+              toggleCategory(item.id);
+            }}
           >
             <Image source={item.icon} style={styles.categoryIcon} />
             <Text
