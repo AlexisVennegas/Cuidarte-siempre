@@ -1,15 +1,19 @@
-
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
 
-const Step7 = () => {
+
+// recibimos los props de la pantalla anterior de      // le pasamos por props los days
+        //  selectedDays={selectedDays}
+         // setSelectedDays={setSelectedDays}
+
+const Step7 = ({ selectedDays, setSelectedDays, startDate, setStartDate, startTime, endTime })=> {   
 
 
     const days = ["L", "M", "X", "J", "V", "S", "D"];
-    const [selectedDays, setSelectedDays] = useState([]);
-    const [startTime, setStartTime] = useState('0:00');
-    const [endTime, setEndTime] = useState('0:00');
-    const [startDate, setStartDate] = useState('');
+  
+    //const [startTime, setStartTime] = useState('0:00');
+    //const [endTime, setEndTime] = useState('0:00');
+
     const [phone, setPhone] = useState("");
     return (
         <>
@@ -60,37 +64,37 @@ const Step7 = () => {
                     ))}
                 </View>
 
-                {/* Horario */}
-                <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>Horario seleccionado</Text>
-                <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10 }}>
-                    <TextInput
-                        style={{
-                            backgroundColor: "#F0F0F0",
-                            padding: 10,
-                            borderRadius: 10,
-                            width: "45%",
-                            textAlign: "center",
-                            fontSize: 16,
-                        }}
-                        value={startTime}
-                        editable={false}
-                    />
-                    <TextInput
-                        style={{
-                            backgroundColor: "#F0F0F0",
-                            padding: 10,
-                            borderRadius: 10,
-                            width: "45%",
-                            textAlign: "center",
-                            fontSize: 16,
-                        }}
-                        // uamos starttime para el value
-                        value={endTime}
-                        editable={false}
-                    />
-                </View>
+ 
+                                <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>Horario seleccionado</Text>
+                                <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10 }}>
+                                    <TextInput
+                                        style={{
+                                            backgroundColor: "#F0F0F0",
+                                            padding: 10,
+                                            borderRadius: 10,
+                                            width: "45%",
+                                            textAlign: "center",
+                                            fontSize: 16,
+                                        }}
+                                        value={startTime}
+                                        onChangeText={setStartDate}
+                                        editable={true}
+                                    />
+                                    <TextInput
+                                        style={{
+                                            backgroundColor: "#F0F0F0",
+                                            padding: 10,
+                                            borderRadius: 10,
+                                            width: "45%",
+                                            textAlign: "center",
+                                            fontSize: 16,
+                                        }}
+                                        value={endTime}
+                                        editable={false}
+                                    />
+                                </View>
 
-                {/* Fecha */}
+                                {/* Fecha */}
                 <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>A partir de:</Text>
                 <TextInput
                     style={{
@@ -102,9 +106,8 @@ const Step7 = () => {
                         textAlign: "center",
                     }}
                     value={startDate}
-                    onChangeText={setStartDate}
-                    placeholder={`${new Date().toLocaleDateString()}`}
                     editable={false}
+
                 />
 
                 {/* Teléfono */}
