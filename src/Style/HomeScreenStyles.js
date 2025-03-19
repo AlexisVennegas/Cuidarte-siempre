@@ -92,6 +92,13 @@ export const stylesSteps = StyleSheet.create({
 });
 
 export const styles = StyleSheet.create({
+  invalidInput: {
+    borderColor: 'red', // Cambiar color del borde cuando la fecha es inválida
+  },
+  errorText: {
+    color: 'red',
+    marginTop: 5,
+  },
   containerInfo: {
   
     width: '100%',

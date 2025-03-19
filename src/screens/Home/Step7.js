@@ -1,16 +1,34 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
+import { phoneStyle } from "../../Style/PhoneStyle";
 
 
 // recibimos los props de la pantalla anterior de      // le pasamos por props los days
-        //  selectedDays={selectedDays}
-         // setSelectedDays={setSelectedDays}
+//  selectedDays={selectedDays}
+// setSelectedDays={setSelectedDays}
 
-const Step7 = ({ selectedDays, setSelectedDays, startDate, setStartDate, startTime, endTime })=> {   
+const Step7 = ({ selectedDays, setSelectedDays, startDate, setStartDate, startTime, endTime }) => {
 
 
     const days = ["L", "M", "X", "J", "V", "S", "D"];
-  
+    const [isValid, setIsValid] = useState(true);  // Para manej
+    const handlePhoneChange = (text) => {
+        // Solo permitir números y el signo "+"
+        const formattedText = text.replace(/[^0-9+]/g, '');
+
+        // Formatear el teléfono con separaciones cada 3 dígitos
+        let newPhone = formattedText;
+        if (newPhone.length > 3 && newPhone.length <= 6) {
+            newPhone = newPhone.slice(0, 3) + ' ' + newPhone.slice(3);
+        } else if (newPhone.length > 6 && newPhone.length <= 10) {
+            newPhone = newPhone.slice(0, 3) + ' ' + newPhone.slice(3, 6) + ' ' + newPhone.slice(6);
+        }
+
+        // Validar el formato de teléfono
+        const isPhoneValid = newPhone.length === 12;  // +52 000 000 0000
+        setPhone(newPhone);
+        setIsValid(isPhoneValid);
+    };
     //const [startTime, setStartTime] = useState('0:00');
     //const [endTime, setEndTime] = useState('0:00');
 
@@ -64,37 +82,37 @@ const Step7 = ({ selectedDays, setSelectedDays, startDate, setStartDate, startTi
                     ))}
                 </View>
 
- 
-                                <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>Horario seleccionado</Text>
-                                <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10 }}>
-                                    <TextInput
-                                        style={{
-                                            backgroundColor: "#F0F0F0",
-                                            padding: 10,
-                                            borderRadius: 10,
-                                            width: "45%",
-                                            textAlign: "center",
-                                            fontSize: 16,
-                                        }}
-                                        value={startTime}
-                                        onChangeText={setStartDate}
-                                        editable={true}
-                                    />
-                                    <TextInput
-                                        style={{
-                                            backgroundColor: "#F0F0F0",
-                                            padding: 10,
-                                            borderRadius: 10,
-                                            width: "45%",
-                                            textAlign: "center",
-                                            fontSize: 16,
-                                        }}
-                                        value={endTime}
-                                        editable={false}
-                                    />
-                                </View>
 
-                                {/* Fecha */}
+                <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>Horario seleccionado</Text>
+                <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10 }}>
+                    <TextInput
+                        style={{
+                            backgroundColor: "#F0F0F0",
+                            padding: 10,
+                            borderRadius: 10,
+                            width: "45%",
+                            textAlign: "center",
+                            fontSize: 16,
+                        }}
+                        value={startTime}
+                        onChangeText={setStartDate}
+                        editable={true}
+                    />
+                    <TextInput
+                        style={{
+                            backgroundColor: "#F0F0F0",
+                            padding: 10,
+                            borderRadius: 10,
+                            width: "45%",
+                            textAlign: "center",
+                            fontSize: 16,
+                        }}
+                        value={endTime}
+                        editable={false}
+                    />
+                </View>
+
+                {/* Fecha */}
                 <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>A partir de:</Text>
                 <TextInput
                     style={{
@@ -113,18 +131,14 @@ const Step7 = ({ selectedDays, setSelectedDays, startDate, setStartDate, startTi
                 {/* Teléfono */}
                 <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>Ingresa tu teléfono</Text>
                 <TextInput
-                    style={{
-                        backgroundColor: "#F0F0F0",
-                        padding: 10,
-                        borderRadius: 10,
-                        fontSize: 16,
-                        marginBottom: 20,
-                    }}
-                    placeholder="+52 0000000000"
+                    style={[phoneStyle.input, !isValid && phoneStyle.invalidInput]}  // Cambiar color si es inválido
+                    placeholder="+52 000 000 0000"
                     keyboardType="phone-pad"
                     value={phone}
-                    onChangeText={setPhone}
+                    onChangeText={handlePhoneChange}
+                    maxLength={14} // Limitar a 14 caracteres (+52 000 000 0000)
                 />
+                {!isValid && <Text style={phoneStyle.errorText}>Formato de teléfono inválido</Text>}
 
                 {/* Método de pago */}
 
