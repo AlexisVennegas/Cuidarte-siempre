@@ -20,6 +20,7 @@ const Step1 = ({formData, setFormData}) => {
         ...formData,
         selectcategories: selectcategories,
       });
+      
     }
 
   return (

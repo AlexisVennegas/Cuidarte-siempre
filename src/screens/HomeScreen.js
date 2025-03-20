@@ -45,9 +45,9 @@ export default function HomeScreen() {
     selectedCategory: null,
     selectcategories: [],
     selectdiseases: [],
+    selectedDays: [],
     startTime: "0:00",
     endTime: "0:00",
-    selectedDays: [],
     startDate: "",
   });
 

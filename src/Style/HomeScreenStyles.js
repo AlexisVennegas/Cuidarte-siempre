@@ -95,6 +95,10 @@ export const styles = StyleSheet.create({
   invalidInput: {
     borderColor: 'red', // Cambiar color del borde cuando la fecha es inválida
   },
+  categoryTextSelected: {
+    // le ponemos un backgrounr
+    backgroundColor: '#BAE5FF',
+  },
   errorText: {
     color: 'red',
     marginTop: 5,
