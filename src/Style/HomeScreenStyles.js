@@ -7,6 +7,10 @@ export const stylesSteps = StyleSheet.create({
     padding: 20,
 
   },
+  subContainer: {
+    flex: 1,
+    marginTop: 50,
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -24,7 +28,7 @@ export const stylesSteps = StyleSheet.create({
   stepIndicator: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 15,
+   // marginBottom: 15,
   },
   stepCircle: {
     backgroundColor: '#008CFF',
@@ -33,26 +37,28 @@ export const stylesSteps = StyleSheet.create({
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center',
-    marginRight: 10,
+   // marginRight: 10,
   },
   stepNumber: {
     color: 'white',
     fontWeight: 'bold',
   },
   title: {
-    padding: 10,
+    
+    marginTop: 30,
     fontSize: 16,
     fontWeight: 'bold',
   },
   titleCategories: {
     fontSize: 16,
+    marginStart: 10,
+
     fontWeight: 'bold',
   },
   needsGrid: {
     flexDirection: 'row',
     // pra que ocupe el 100% del ancho
-
-
+    border: '1px solid purple',
     flexWrap: 'wrap',
     gap: 10,  // Espacio entre los botones
 
@@ -116,6 +122,7 @@ export const styles = StyleSheet.create({
   },
   backButton: {
     padding: 10,
+
   },
   backButtonText: {
     fontSize: 18,
@@ -130,7 +137,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   container: {
-    display: 'flex',
+    // ponemos un elemento a lado del otro
+  
     flex: 1,
     backgroundColor: '#F5F5F5',
     padding: 10,
@@ -146,6 +154,20 @@ export const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     marginBottom: 20,
+  },
+  headerContainer: {
+    border: '1px solid red',
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginLeft: 10,
+  },
+  container1: {
+    width: '50%'
+  },
+  container2 : {
+    width: '50%'
   },
   logo: {
     width: 320,
@@ -166,6 +188,20 @@ export const styles = StyleSheet.create({
   userName: {
     fontWeight: 'bold',
     color: '#007AFF',
+  },
+  username2: {
+   
+      fontSize: 18,
+      fontWeight: "bold",
+
+  },
+  backIcon2: {
+    width: 24,
+    height: 24,
+    resizeMode: "contain",
+  },
+  backButton2: {
+    padding: 10,
   },
   categoryButton: {
     flex: 1,

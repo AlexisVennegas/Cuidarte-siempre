@@ -5,31 +5,34 @@ import { stylesSteps } from "../../Style/HomeScreenStyles";
 import { Picker } from "@react-native-picker/picker";
 import { categories } from "../../Data/categoriesData";
 
-const Step1 = ({formData, setFormData}) => {
+const Step1 = ({selectedCategory, setSelectedCategory, formData, setFormData}) => {
 
     const [selectcategories, setSelectCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState(null);
-  
-    const toggleCategory = (category) => {
-      if (selectcategories.includes(category)) {
-        setSelectCategories(selectcategories.filter((c) => c !== category));
-      } else {
-        setSelectCategories([...selectcategories, category]);
-      }
-      setFormData({
-        ...formData,
-        selectcategories: selectcategories,
-      });
-      
+   // const [selectedCategory, setSelectedCategory] = useState(null);
+   const toggleCategory = (category) => {
+    let updatedCategories;
+    if (selectcategories.includes(category)) {
+      updatedCategories = selectcategories.filter((c) => c !== category);
+    } else {
+      updatedCategories = [...selectcategories, category];
     }
+
+    setSelectCategories(updatedCategories);
+    setFormData({
+      ...formData,
+      selectedCategory: category,  // Guardar la categoría seleccionada en formData
+      selectcategories: updatedCategories,
+    });
+  };
+
 
   return (
     <>
     {/* Paso 1: Selección de servicio */}
-    <Text style={stylesSteps.title}>
-      Para poder ofrecerte el mejor servicio, necesitamos que nos
-      proporciones la siguiente información
-    </Text>
+    {/* <Text style={stylesSteps.title}>
+    
+    </Text> */}
+       <View style={styles.subContainer}>
     <FlatList
       contentContainerStyle={styles.subContainer}
       data={categories}
@@ -65,7 +68,8 @@ const Step1 = ({formData, setFormData}) => {
           </TouchableOpacity>
         );
       }}
-    />
+      />
+      </View>
   </>
   )
 }

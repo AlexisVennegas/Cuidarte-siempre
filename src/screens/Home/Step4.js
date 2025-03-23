@@ -44,7 +44,7 @@ const Step4 = ({ startTime, endTime, setStartTime, setEndTime, selectedDays, set
 
   return (
     <>
-      <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <ScrollView style={{ flex: 1 }}>
         <Text style={stylesSteps.title}>
           ¿Franja horaria en la que necesitas nuestros servicios?
         </Text>

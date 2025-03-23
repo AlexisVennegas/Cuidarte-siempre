@@ -5,6 +5,7 @@
     import { Ionicons } from '@expo/vector-icons';
     import {reservationStyle} from '../../Style/ReservationStyles';
     import { stylesSteps } from '../../Style/HomeScreenStyles';
+
     import {reservations} from '../../Data/reservationsData';
     // resivimos el paramettro step para saber en que paso estamos
     const Step5 =({ step, setStep })=> {   
@@ -22,6 +23,7 @@
         return (
 
             <>
+              <View style={stylesSteps.subContainer}>
             {/* Paso 5: Selección de personal */}
             <TouchableOpacity style={stylesSteps.searchButton} onPress={nextStep}>
                 <FlatList
@@ -48,6 +50,7 @@
             </TouchableOpacity>
 
             {/* Muestra una lista de opciones de enfermeras o personal */}
+            </View>
         </>
         )
     }

@@ -22,7 +22,7 @@ import Step8 from "./Home/Step8";
 import Step7 from "./Home/Step7";
 import Step6 from "./Home/Step6";
 import Step5 from "./Home/Step5";
-import  Step4 from "./Home/Step4";
+import Step4 from "./Home/Step4";
 import Step3 from "./Home/Step3";
 import Step2 from "./Home/Step2";
 import Step1 from "./Home/Step1";
@@ -39,7 +39,8 @@ export default function HomeScreen() {
   const [birthDate, setBirthDate] = useState('');
   const hideDatePicker = () => setDatePickerVisibility(false);
   const [selectcategories, setSelectCategories] = useState([]);
-  
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
   // un json para ir guardando la informacion del formulario
   const [formData, setFormData] = useState({
     selectedCategory: null,
@@ -72,12 +73,12 @@ export default function HomeScreen() {
     switch (step) {
       case 1:
         return (
-       <Step1 selectcategories={selectcategories} setSelectCategories={setSelectCategories} formData={formData} setFormData={setFormData} />
+          <Step1 selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} selectcategories={selectcategories} setSelectCategories={setSelectCategories} formData={formData} setFormData={setFormData} />
         );
       case 2:
         return (
           <Step2 selectcategories={selectcategories} setSelectCategories={setSelectCategories} formData={formData} setFormData={setFormData}
-            />
+          />
         );
       case 3:
         return (
@@ -127,17 +128,21 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <View style={styles.header}>
         <Image source={require("../../assets/logo.png")} style={styles.logo} />
-        <Text style={styles.welcomeText}>
-          <Text style={styles.userName}>Hola, María Fernanda</Text>
+        <View styles={styles.headerContainer}>
+          <View styles={styles.container1} >
+            <Text style={styles.username2}>Hola, María Fernanda</Text>
+          </View>
+          <View>
+            <TouchableOpacity style={styles.backButton2} onPress={previousStep}>
+              <Image
+                source={require("../../assets/arrow.png")}
+                style={styles.backIcon2}
+              // funcion press que regresa al paso anterior
+              />
+            </TouchableOpacity>
 
-          <TouchableOpacity style={styles.backButton} onPress={previousStep}>
-            <Image
-              source={require("../../assets/arrow.png")}
-              style={styles.backIcon}
-            // funcion press que regresa al paso anterior
-            />
-          </TouchableOpacity>
-        </Text>
+          </View>
+        </View>
       </View>
       <View style={stylesSteps.stepIndicator}>
         <View style={stylesSteps.stepCircle}>
@@ -145,8 +150,7 @@ export default function HomeScreen() {
         </View>
         <Text style={stylesSteps.titleCategories}>
           {step === 1 && "Selecciona el tipo de servicio que solicitas"}
-          {step === 2 &&
-            "Selecciona las necesidades que tiene el paciente en el día a día"}
+          {step === 2 && "Selecciona las necesidades que tiene el paciente en el día a día"}
           {step === 3 && "¿Qué padecimientos tiene tu paciente?"}
           {step === 4 &&
             "Indica el horario y los días que necesitas el servicio"}
@@ -164,7 +168,7 @@ export default function HomeScreen() {
       {/* Botón siguiente */}
       <TouchableOpacity
         // el step 5 desaparece el boton siguiente
-            
+
         style={step === 5 ? styles.nextButtonHidde : styles.nextButton}
         //onPress={nextStep +() => console.log(formData)}
         // onpress con el nextstep y console.log para ver el json

@@ -23,22 +23,24 @@ const Step4 = ({selectdiseases, setSelectDiseases, formData, setFormData}) => {
     return (
 
         <>
-            {/* Paso 3: Selección de padecimientos */}
-            <ScrollView contentContainerStyle={stylesSteps.needsGrid}>
-                {diseaseData.map((item, index) => (
-                    <TouchableOpacity
-                        key={index}
-                        style={[
-                            stylesSteps.needButton,
-                            selectdiseases.includes(item) &&
-                            stylesSteps.needButtonSelected,
-                        ]}
-                        onPress={() => toggleDisease(item)}
-                    >
-                        <Text style={stylesSteps.needButtonText}>{item}</Text>
-                    </TouchableOpacity>
-                ))}
-            </ScrollView>
+          
+                  <View style={styles.subContainer}>
+                    <ScrollView contentContainerStyle={stylesSteps.needsGrid} >
+                        {diseaseData.map((item, index) => (
+                            <TouchableOpacity
+                                key={index}
+                                style={[
+                                    stylesSteps.needButton,
+                                    selectdiseases.includes(item) &&
+                                    stylesSteps.needButtonSelected,
+                                ]}
+                                onPress={() => toggleDisease(item)}
+                            >
+                                <Text style={stylesSteps.needButtonText}>{item}</Text>
+                            </TouchableOpacity>
+                        ))}
+                    </ScrollView>
+                    </View>
         </>
     )
 }
